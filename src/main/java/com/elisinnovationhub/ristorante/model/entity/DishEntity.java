@@ -1,5 +1,6 @@
 package com.elisinnovationhub.ristorante.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +34,8 @@ public class DishEntity {
 
     @Column(name = "available")
     private boolean available;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "dishes")
+    private List<OrderRequestEntity> orders;
 }
