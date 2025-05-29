@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderRequestDTO {
-    private List<Long> dishIds;
+    private List<DishDTO> dishes;
     private DeliveryType deliveryType;
     private boolean withReservation;
     private Integer participants; // obbligatorio solo per IN_HOUSE

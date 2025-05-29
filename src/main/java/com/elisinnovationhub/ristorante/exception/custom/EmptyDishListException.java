@@ -1,7 +1,9 @@
 package com.elisinnovationhub.ristorante.exception.custom;
 
+import org.apache.coyote.BadRequestException;
+
 public class EmptyDishListException extends RuntimeException {
-  public EmptyDishListException(String message) {
-    super(message);
-  }
+    public EmptyDishListException() {
+        super("Dish list cannot be empty.");
+    }
 }

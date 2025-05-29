@@ -21,27 +21,31 @@ public class OrderResponseEntity {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "order_id", nullable = false)
     private Long orderId;
 
-    @ElementCollection
-    @CollectionTable(name = "dish_names", joinColumns = @JoinColumn(name = "order_response_id"))
-    @Column(name = "dish_name", nullable = false)
-    private List<String> dishes;
+    @OneToOne
+    @JoinColumn(name = "order_request_id", unique = true)
+    private OrderRequestEntity orderRequest;
 
-    @Column(name = "total", nullable = false, precision = 10, scale = 2)
+    @ManyToMany
+    @JoinTable(
+            name = "order_response_dishes",
+            joinColumns = @JoinColumn(name = "order_response_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
+    )
+    private List<DishEntity> dishes;
+
+    @Column(name = "total", precision = 10, scale = 2)
     private BigDecimal total;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "delivery_type", nullable = false)
+    @Column(name = "delivery_type")
     private DeliveryType deliveryType;
 
-    @Column(name = "with_reservation", nullable = false)
+    @Column(name = "with_reservation")
     private boolean withReservation;
 
     @Column(name = "participants")

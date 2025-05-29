@@ -19,22 +19,28 @@ public class OrderRequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
+    @Column
     private Long id;
 
-    @ElementCollection
-    @CollectionTable(name = "dish_ids", joinColumns = @JoinColumn(name = "order_request_id"))
-    @Column(name = "dish_id", nullable = false)
-    private List<Long> dishIds;
+    @ManyToMany
+    @JoinTable(
+            name = "order_request_dishes",
+            joinColumns = @JoinColumn(name = "order_request_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
+    )
+    private List<DishEntity> dishes;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "delivery_type", nullable = false)
+    @Column(name = "delivery_type")
     private DeliveryType deliveryType;
 
-    @Column(name = "with_reservation", nullable = false)
+    @Column(name = "with_reservation")
     private boolean withReservation;
 
     @Column(name = "participants")
     private Integer participants; // obbligatorio solo per IN_HOUSE
+
+    @OneToOne(mappedBy = "orderRequest", cascade = CascadeType.ALL)
+    private OrderResponseEntity response;
 
 }

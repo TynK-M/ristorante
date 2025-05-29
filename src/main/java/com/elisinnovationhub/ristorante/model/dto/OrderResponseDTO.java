@@ -1,6 +1,7 @@
 package com.elisinnovationhub.ristorante.model.dto;
 
 import com.elisinnovationhub.ristorante.model.en.DeliveryType;
+import com.elisinnovationhub.ristorante.model.entity.DishEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderResponseDTO {
     private Long orderId;
-    private List<String> dishes;
+    private List<DishEntity> dishes;
     private BigDecimal total;
     private LocalDateTime createdAt;
     private DeliveryType deliveryType;
